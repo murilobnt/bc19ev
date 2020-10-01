@@ -101,6 +101,8 @@ for i, item_arr in enumerate(items):
     ax[i][j].plot(last_x_id, brazil[last_x_id], marker="o", color="Black")
     ax[i][j].plot(min_point_id, brazil[min_point_id], marker="o", color="Black")
 
+    ax[i][j].yaxis.grid(True, alpha=0.45)
+
     ax[i][j].annotate(int(brazil[min_point_id]),
                      (min_point_id, brazil[min_point_id]),
                      textcoords="offset points",
@@ -132,7 +134,7 @@ for i, item_arr in enumerate(items):
                         Line2D([0], [0], color='red', lw=2, label='Mean of countries')]
       ax[i][j].legend(handles=legend_elements, loc='upper left')
 
-fig.suptitle("Evaluation of the Social Distancing in Brazil during COVID-19 outbreak, 2020", fontsize=14)
+fig.suptitle("Evaluation of the Mobility in Brazil during COVID-19 outbreak, 2020", fontsize=14)
 plt.savefig("data/brazil_covid19_evaluation.png", dpi=dpi)
 
 # ---------------
