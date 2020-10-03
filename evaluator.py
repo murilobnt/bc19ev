@@ -42,7 +42,6 @@ import matplotlib.dates as mdates
 input = "https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv"
 
 data = pd.read_csv(input)
-pandas_profiling.ProfileReport(data)
 
 # ---------------
 
@@ -90,6 +89,8 @@ for i, item_arr in enumerate(items):
     monthFmt = mdates.DateFormatter("%b")
     ax[i][j].xaxis.set_major_formatter(monthFmt)
 
+    fig.canvas.draw()
+
     all_countries_means.plot(legend=False, color="red", linewidth=1, alpha=1, ax=ax[i][j])
 
     min_point_id = brazil.idxmin()
@@ -134,7 +135,11 @@ for i, item_arr in enumerate(items):
                         Line2D([0], [0], color='red', lw=2, label='Mean of countries')]
       ax[i][j].legend(handles=legend_elements, loc='upper left')
 
-fig.suptitle("Evaluation of the Mobility in Brazil during COVID-19 outbreak, 2020", fontsize=14)
-plt.savefig("data/brazil_covid19_evaluation.png", dpi=dpi)
+    labels = [item.get_text() for item in ax[i][j].get_xticklabels()]
+    labels[-1] = labels[-1] + "\n2020"
+    ax[i][j].set_xticklabels(labels)
+
+fig.suptitle("Overview of Brazil's Mobility Activities During the COVID-19 Outbreak, 2020", fontsize=14)
+plt.savefig("data/brazil_covid19_evaluation.png", dpi=dpi)#, bbox_inches='tight')
 
 # ---------------
